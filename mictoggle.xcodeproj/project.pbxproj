@@ -7,14 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		20BEB62B1189DA95BD30E795 /* Pods_mictoggle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 809172165DA84E7396F76205 /* Pods_mictoggle.framework */; };
 		5B41618F243B54FB006435A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B41618E243B54FB006435A0 /* AppDelegate.swift */; };
 		5B416191243B54FB006435A0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B416190243B54FB006435A0 /* ContentView.swift */; };
 		5B416193243B54FC006435A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B416192243B54FC006435A0 /* Assets.xcassets */; };
 		5B416196243B54FC006435A0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B416195243B54FC006435A0 /* Preview Assets.xcassets */; };
 		5B416199243B54FC006435A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B416197243B54FC006435A0 /* Main.storyboard */; };
+		5BD4D9D6243BB5F60073A413 /* MicManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D9D5243BB5F60073A413 /* MicManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E98DAE1CAF18B31D8C3E4C8 /* Pods-mictoggle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mictoggle.release.xcconfig"; path = "Target Support Files/Pods-mictoggle/Pods-mictoggle.release.xcconfig"; sourceTree = "<group>"; };
 		5B41618B243B54FB006435A0 /* mictoggle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mictoggle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B41618E243B54FB006435A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5B416190243B54FB006435A0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -23,6 +26,11 @@
 		5B416198243B54FC006435A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5B41619A243B54FC006435A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B41619B243B54FC006435A0 /* mictoggle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = mictoggle.entitlements; sourceTree = "<group>"; };
+		5BD4D9D3243BB5F50073A413 /* mictoggle-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mictoggle-Bridging-Header.h"; sourceTree = "<group>"; };
+		5BD4D9D4243BB5F60073A413 /* MicManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MicManager.h; sourceTree = "<group>"; };
+		5BD4D9D5243BB5F60073A413 /* MicManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MicManager.m; sourceTree = "<group>"; };
+		809172165DA84E7396F76205 /* Pods_mictoggle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mictoggle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5918F9C3081D5B7950645D4 /* Pods-mictoggle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mictoggle.debug.xcconfig"; path = "Target Support Files/Pods-mictoggle/Pods-mictoggle.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,17 +38,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20BEB62B1189DA95BD30E795 /* Pods_mictoggle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3392FDBD63C2F57742A5D586 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A5918F9C3081D5B7950645D4 /* Pods-mictoggle.debug.xcconfig */,
+				0E98DAE1CAF18B31D8C3E4C8 /* Pods-mictoggle.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		4814B7862960493566FC1F67 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				809172165DA84E7396F76205 /* Pods_mictoggle.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		5B416182243B54FB006435A0 = {
 			isa = PBXGroup;
 			children = (
 				5B41618D243B54FB006435A0 /* mictoggle */,
 				5B41618C243B54FB006435A0 /* Products */,
+				3392FDBD63C2F57742A5D586 /* Pods */,
+				4814B7862960493566FC1F67 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,6 +91,9 @@
 				5B41619A243B54FC006435A0 /* Info.plist */,
 				5B41619B243B54FC006435A0 /* mictoggle.entitlements */,
 				5B416194243B54FC006435A0 /* Preview Content */,
+				5BD4D9D4243BB5F60073A413 /* MicManager.h */,
+				5BD4D9D5243BB5F60073A413 /* MicManager.m */,
+				5BD4D9D3243BB5F50073A413 /* mictoggle-Bridging-Header.h */,
 			);
 			path = mictoggle;
 			sourceTree = "<group>";
@@ -81,9 +113,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5B41619E243B54FC006435A0 /* Build configuration list for PBXNativeTarget "mictoggle" */;
 			buildPhases = (
+				0AD071F612EF266AAA03CAAE /* [CP] Check Pods Manifest.lock */,
 				5B416187243B54FB006435A0 /* Sources */,
 				5B416188243B54FB006435A0 /* Frameworks */,
 				5B416189243B54FB006435A0 /* Resources */,
+				C1F508A75E15647406DC7872 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -106,6 +140,7 @@
 				TargetAttributes = {
 					5B41618A243B54FB006435A0 = {
 						CreatedOnToolsVersion = 11.4;
+						LastSwiftMigration = 1140;
 					};
 				};
 			};
@@ -140,6 +175,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0AD071F612EF266AAA03CAAE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-mictoggle-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C1F508A75E15647406DC7872 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-mictoggle/Pods-mictoggle-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-mictoggle/Pods-mictoggle-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-mictoggle/Pods-mictoggle-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5B416187243B54FB006435A0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -147,6 +224,7 @@
 			files = (
 				5B416191243B54FB006435A0 /* ContentView.swift in Sources */,
 				5B41618F243B54FB006435A0 /* AppDelegate.swift in Sources */,
+				5BD4D9D6243BB5F60073A413 /* MicManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,8 +357,10 @@
 		};
 		5B41619F243B54FC006435A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A5918F9C3081D5B7950645D4 /* Pods-mictoggle.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = mictoggle/mictoggle.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -296,14 +376,18 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = io.sentry.mictoggle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "mictoggle/mictoggle-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
 		5B4161A0243B54FC006435A0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0E98DAE1CAF18B31D8C3E4C8 /* Pods-mictoggle.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = mictoggle/mictoggle.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -319,6 +403,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = io.sentry.mictoggle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "mictoggle/mictoggle-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
