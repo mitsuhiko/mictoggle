@@ -22,32 +22,53 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         if let button = statusItem.button {
-            button.image = NSImage(named:NSImage.Name("MicIcon"))
             button.action = #selector(toggleMic(_:))
         }
         
         self.oldVolume = MicManager.micVolume()
+        if self.oldVolume == 0 {
+            self.openMic = false
+            self.oldVolume = 0.8
+        }
+        self.syncState()
+        self.constructMenu()
         
         self.hotKey.keyDownHandler = {
             self.toggleMic(nil)
         }
     }
     
-    @objc func toggleMic(_ sender: Any?) {
-        self.openMic = !self.openMic
-        
+    func syncState() {
         if let button = statusItem.button {
             if self.openMic {
                 button.image = NSImage(named:NSImage.Name("MicIcon"))
                 MicManager.setMicVolume(self.oldVolume);
-                NSSound(named: "Pop")?.play()
             } else {
                 button.image = NSImage(named:NSImage.Name("NoMicIcon"))
-                self.oldVolume = MicManager.micVolume()
                 MicManager.setMicVolume(0.0);
-                NSSound(named: "Bottle")?.play()
             }
         }
+    }
+    
+    @objc func toggleMic(_ sender: Any?) {
+        self.openMic = !self.openMic
+        if self.openMic {
+            NSSound(named: "Pop")?.play()
+        } else {
+            NSSound(named: "Bottle")?.play()
+            self.oldVolume = MicManager.micVolume()
+        }
+        self.syncState()
+    }
+    
+    func constructMenu() {
+        let menu = NSMenu()
+
+        menu.addItem(NSMenuItem(title: "Toggle Mic", action: #selector(AppDelegate.toggleMic(_:)), keyEquivalent: ""))
+        menu.addItem(NSMenuItem.separator())
+        menu.addItem(NSMenuItem(title: "Quit App", action: #selector(NSApplication.terminate(_:)), keyEquivalent: ""))
+
+        statusItem.menu = menu
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
