@@ -10,8 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void (^MicManagerVolumeListener)(void);
+
 @interface MicManager : NSObject
 
++(void)addMicVolumeListener:(MicManagerVolumeListener)listener;
 +(float)micVolume;
 +(void)setMicVolume:(float)vol;
 

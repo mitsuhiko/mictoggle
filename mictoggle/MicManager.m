@@ -11,6 +11,36 @@
 
 @implementation MicManager
 
++(void)addMicVolumeListener:(MicManagerVolumeListener)listener {
+    // get device
+    AudioDeviceID device = kAudioDeviceUnknown;
+    UInt32 size = sizeof(device);
+    
+    AudioObjectPropertyAddress propertyAddress;
+    propertyAddress.mSelector = kAudioHardwarePropertyDefaultInputDevice;
+    propertyAddress.mElement = kAudioObjectPropertyElementMaster;
+    propertyAddress.mScope = kAudioObjectPropertyScopeGlobal;
+
+    if (noErr != AudioObjectGetPropertyData(kAudioObjectSystemObject, &propertyAddress, 0, NULL, &size, &device)) {
+        return;
+    }
+    
+    // listen to  master volume (channel 0)
+    float volume;
+    size = sizeof(volume);
+    
+    propertyAddress.mSelector = kAudioDevicePropertyVolumeScalar;
+    propertyAddress.mElement = kAudioObjectPropertyElementMaster;
+    propertyAddress.mScope = kAudioDevicePropertyScopeInput;
+    
+    AudioObjectAddPropertyListenerBlock(device,
+                                        &propertyAddress,
+                                        dispatch_get_main_queue(),
+                                        ^(UInt32 inNumberAddresses, const AudioObjectPropertyAddress *inAddresses) {
+        listener();
+    });
+}
+
 +(float)micVolume {
     // get device
     AudioDeviceID device = kAudioDeviceUnknown;

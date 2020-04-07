@@ -13,10 +13,10 @@ import HotKey
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    var window: NSWindow!
-
     let statusItem = NSStatusBar.system.statusItem(withLength:NSStatusItem.squareLength)
     var openMic = true
+    var soundEffects = true
+    var soundEffectsMenuItem: NSMenuItem!
     var oldVolume: Float = 0.0
     let hotKey = HotKey(key: .equal, modifiers: [.command, .shift])
 
@@ -25,13 +25,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             button.action = #selector(toggleMic(_:))
         }
         
+        self.soundEffects = !UserDefaults.standard.bool(forKey: "noSoundEffects")
+        
         self.oldVolume = MicManager.micVolume()
         if self.oldVolume == 0 {
             self.openMic = false
             self.oldVolume = 0.8
         }
-        self.syncState()
+        
+        MicManager.addMicVolumeListener({
+            let volume = MicManager.micVolume()
+            if volume == 0 {
+                self.openMic = false
+            } else {
+                self.openMic = true
+                self.oldVolume = volume
+            }
+            self.syncState()
+        })
+        
         self.constructMenu()
+        self.syncState()
         
         self.hotKey.keyDownHandler = {
             self.toggleMic(nil)
@@ -39,7 +53,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func syncState() {
-        if let button = statusItem.button {
+        if let menuItem = self.soundEffectsMenuItem {
+            if self.soundEffects {
+                menuItem.state = NSControl.StateValue.on;
+            } else {
+                menuItem.state = NSControl.StateValue.off;
+            }
+        }
+        if let button = self.statusItem.button {
             if self.openMic {
                 button.image = NSImage(named:NSImage.Name("MicIcon"))
                 MicManager.setMicVolume(self.oldVolume);
@@ -52,21 +73,32 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @objc func toggleMic(_ sender: Any?) {
         self.openMic = !self.openMic
-        if self.openMic {
-            NSSound(named: "Pop")?.play()
-        } else {
-            NSSound(named: "Bottle")?.play()
-            self.oldVolume = MicManager.micVolume()
+        if self.soundEffects {
+            if self.openMic {
+                NSSound(named: "Pop")?.play()
+            } else {
+                NSSound(named: "Bottle")?.play()
+                self.oldVolume = MicManager.micVolume()
+            }
         }
+        self.syncState()
+    }
+    
+    @objc func toggleSoundEffects(_ sender: Any?) {
+        self.soundEffects = !self.soundEffects
+        UserDefaults.standard.set(!self.soundEffects, forKey: "noSoundEffects")
         self.syncState()
     }
     
     func constructMenu() {
         let menu = NSMenu()
+        
+        soundEffectsMenuItem = NSMenuItem(title: "Play Sound Effects", action: #selector(AppDelegate.toggleSoundEffects(_:)), keyEquivalent: "")
 
         menu.addItem(NSMenuItem(title: "Toggle Mic", action: #selector(AppDelegate.toggleMic(_:)), keyEquivalent: ""))
+        menu.addItem(soundEffectsMenuItem)
         menu.addItem(NSMenuItem.separator())
-        menu.addItem(NSMenuItem(title: "Quit App", action: #selector(NSApplication.terminate(_:)), keyEquivalent: ""))
+        menu.addItem(NSMenuItem(title: "Quit", action: #selector(NSApplication.terminate(_:)), keyEquivalent: ""))
 
         statusItem.menu = menu
     }
