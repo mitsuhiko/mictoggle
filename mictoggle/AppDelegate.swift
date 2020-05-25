@@ -25,14 +25,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var soundEffectsMenuItem: NSMenuItem!
     var pushToTalkMenuItem: NSMenuItem!
     var oldVolume: Float = 0.0
+    let openSound = NSSound(named: "opening.wav")
+    let closeSound = NSSound(named: "closing.wav")
     let hotKey = HotKey(key: .equal, modifiers: [.command, .shift])
     let pushToTalkKey = HotKey(key: .escape, modifiers: [.command])
+    let unifiedKey = HotKey(key: .f13, modifiers: [])
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        if let button = statusItem.button {
-            button.action = #selector(toggleMic(_:))
-        }
-        
         self.soundEffects = !UserDefaults.standard.bool(forKey: "noSoundEffects")
         self.pushToTalk = UserDefaults.standard.bool(forKey: "pushToTalk")
 
@@ -44,42 +43,49 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         MicManager.addMicVolumeListener({
             let volume = MicManager.micVolume()
+            let oldOpenMic = self.openMic
             if volume <= Constants.CLOSE_THRESHOLD {
                 self.openMic = false
             } else {
                 self.openMic = true
                 self.oldVolume = volume
             }
-            self.syncState()
+            if oldOpenMic != self.openMic {
+                self.syncState()
+            }
         })
         
         self.constructMenu()
         self.syncState()
         
         if self.pushToTalk && self.openMic {
-            self.toggleMic(nil)
+            self.toggleMic()
         }
         
         self.hotKey.keyDownHandler = {
             if !self.pushToTalk {
-                self.toggleMic(nil)
+                self.toggleMic()
             }
         }
-        
+
         self.pushToTalkKey.keyDownHandler = {
+            self.doPushToTalk(open: true)
+        }
+
+        self.pushToTalkKey.keyUpHandler = {
+            self.doPushToTalk(open: false)
+        }
+
+        self.unifiedKey.keyDownHandler = {
             if self.pushToTalk {
-                if !self.openMic {
-                    self.toggleMic(nil)
-                }
+                self.doPushToTalk(open: true)
+            } else {
+                self.toggleMic()
             }
         }
-        
-        self.pushToTalkKey.keyUpHandler = {
-            if self.pushToTalk {
-                if self.openMic {
-                    self.toggleMic(nil)
-                }
-            }
+
+        self.unifiedKey.keyUpHandler = {
+            self.doPushToTalk(open: false)
         }
     }
     
@@ -87,6 +93,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if !self.openMic {
             let resetVolume = self.oldVolume <= Constants.CLOSE_THRESHOLD ? Constants.DEFAULT_OPEN_VOL : self.oldVolume;
             MicManager.setMicVolume(resetVolume);
+        }
+    }
+
+    func doPushToTalk(open: Bool) {
+        if self.pushToTalk {
+            if self.openMic != open {
+                self.toggleMic()
+            }
         }
     }
         
@@ -116,14 +130,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
-    @objc func toggleMic(_ sender: Any?) {
+    @objc func toggleMic() {
         self.openMic = !self.openMic
         if self.soundEffects {
             if self.openMic {
-                NSSound(named: "Pop")?.play()
+                self.openSound?.play()
             } else {
-                NSSound(named: "Bottle")?.play()
-                self.oldVolume = MicManager.micVolume()
+                self.closeSound?.play()
             }
         }
         self.syncState()
@@ -147,7 +160,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         soundEffectsMenuItem = NSMenuItem(title: "Play Sound Effects", action: #selector(AppDelegate.toggleSoundEffects(_:)), keyEquivalent: "")
         pushToTalkMenuItem = NSMenuItem(title: "Push to Talk", action: #selector(AppDelegate.togglePushToTalk(_:)), keyEquivalent: "")
 
-        menu.addItem(NSMenuItem(title: "Toggle Mic", action: #selector(AppDelegate.toggleMic(_:)), keyEquivalent: ""))
         menu.addItem(soundEffectsMenuItem)
         menu.addItem(pushToTalkMenuItem)
         menu.addItem(NSMenuItem.separator())

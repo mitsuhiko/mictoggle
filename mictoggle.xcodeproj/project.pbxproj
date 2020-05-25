@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,8 @@
 		5B416196243B54FC006435A0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B416195243B54FC006435A0 /* Preview Assets.xcassets */; };
 		5B416199243B54FC006435A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B416197243B54FC006435A0 /* Main.storyboard */; };
 		5BD4D9D6243BB5F60073A413 /* MicManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BD4D9D5243BB5F60073A413 /* MicManager.m */; };
+		5BDEB586247BE833006C9BE3 /* closing.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5BDEB584247BE833006C9BE3 /* closing.wav */; };
+		5BDEB587247BE833006C9BE3 /* opening.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5BDEB585247BE833006C9BE3 /* opening.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,8 @@
 		5BD4D9D3243BB5F50073A413 /* mictoggle-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mictoggle-Bridging-Header.h"; sourceTree = "<group>"; };
 		5BD4D9D4243BB5F60073A413 /* MicManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MicManager.h; sourceTree = "<group>"; };
 		5BD4D9D5243BB5F60073A413 /* MicManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MicManager.m; sourceTree = "<group>"; };
+		5BDEB584247BE833006C9BE3 /* closing.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = closing.wav; path = mictoggle/closing.wav; sourceTree = "<group>"; };
+		5BDEB585247BE833006C9BE3 /* opening.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = opening.wav; path = mictoggle/opening.wav; sourceTree = "<group>"; };
 		809172165DA84E7396F76205 /* Pods_mictoggle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mictoggle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5918F9C3081D5B7950645D4 /* Pods-mictoggle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mictoggle.debug.xcconfig"; path = "Target Support Files/Pods-mictoggle/Pods-mictoggle.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -51,7 +55,6 @@
 				A5918F9C3081D5B7950645D4 /* Pods-mictoggle.debug.xcconfig */,
 				0E98DAE1CAF18B31D8C3E4C8 /* Pods-mictoggle.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -66,6 +69,8 @@
 		5B416182243B54FB006435A0 = {
 			isa = PBXGroup;
 			children = (
+				5BDEB584247BE833006C9BE3 /* closing.wav */,
+				5BDEB585247BE833006C9BE3 /* opening.wav */,
 				5B41618D243B54FB006435A0 /* mictoggle */,
 				5B41618C243B54FB006435A0 /* Products */,
 				3392FDBD63C2F57742A5D586 /* Pods */,
@@ -168,6 +173,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B416199243B54FC006435A0 /* Main.storyboard in Resources */,
+				5BDEB586247BE833006C9BE3 /* closing.wav in Resources */,
+				5BDEB587247BE833006C9BE3 /* opening.wav in Resources */,
 				5B416196243B54FC006435A0 /* Preview Assets.xcassets in Resources */,
 				5B416193243B54FC006435A0 /* Assets.xcassets in Resources */,
 			);
